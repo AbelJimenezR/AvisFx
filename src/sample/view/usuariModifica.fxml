@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="400" prefWidth="640" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.UsuariModificaController">
+   <children>
+
+      <TextField fx:id="id" disable="true" layoutX="310.0" layoutY="100.0" />
+      <TextField fx:id="nom" layoutX="310.0" layoutY="130.0" />
+      <TextField fx:id="pass" layoutX="310.0" layoutY="210.0" />
+      <ChoiceBox fx:id="rol" layoutX="310.0" layoutY="245.0" prefWidth="170.0" />
+      <Button layoutX="347.0" layoutY="325.0" mnemonicParsing="false" onAction="#optBotons" text="Tornar" />
+      <Button layoutX="277.0" layoutY="325.0" mnemonicParsing="false" onAction="#optBotons" text="Ok" />
+      <Label layoutX="200.0" layoutY="100.0" text="Id:" />
+      <Label layoutX="200.0" layoutY="130.0" text="Nom:" />
+      <Label layoutX="200.0" layoutY="210.0" text="Password:" />
+      <Label layoutX="200.0" layoutY="250.0" text="Rol:" />
+      <Label layoutX="132.0" layoutY="75.0" text="Introudeix l'Id de l'usuari:" />
+      <Label layoutX="203.0" layoutY="22.0" text="MODIFICAR USUARI">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

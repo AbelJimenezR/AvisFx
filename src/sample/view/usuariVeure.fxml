@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.UsuariVeureController">
+   <children>
+      <TableView fx:id="taulaUsuaris" layoutX="-1.0" onMouseClicked="#clickItem" prefHeight="350.0" prefWidth="640.0">
+         <columns>
+            <TableColumn prefWidth="96.0" text="ID">
+               <cellValueFactory>
+                  <PropertyValueFactory property="id" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="96.0" text="NOM">
+               <cellValueFactory>
+                  <PropertyValueFactory property="nom" />
+               </cellValueFactory>
+            </TableColumn>
+            <TableColumn minWidth="0.0" prefWidth="155.0" text="PASSWORD">
+            <cellValueFactory>
+               <PropertyValueFactory property="pass" />
+            </cellValueFactory>
+            </TableColumn>
+            <TableColumn minWidth="0.0" prefWidth="144.0" text="TIPUS">
+            <cellValueFactory>
+               <PropertyValueFactory property="tipus" />
+            </cellValueFactory>
+            </TableColumn>
+         </columns>
+      </TableView>
+      <Button layoutX="300.0" layoutY="360.0" mnemonicParsing="false" onAction="#tornaPrincipal" text="Tornar" />
+      <Button fx:id="bEdita" disable="true" layoutX="380.0" layoutY="360.0" mnemonicParsing="false" onAction="#optBotons" text="Edita" />
+      <Button fx:id="bEsborra" disable="true" layoutX="440.0" layoutY="360.0" mnemonicParsing="false" onAction="#optBotons" text="Esborra" />
+
+   </children>
+</AnchorPane>

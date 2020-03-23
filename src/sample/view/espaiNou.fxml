@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="500.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.EspaiNouController">
+    <children>
+        <Pane fx:id="espai">
+            <Label layoutX="50.0" layoutY="60.0" text="Tipus:" />
+        <Label layoutX="50.0" layoutY="90.0" text="Nom:" />
+        <Label layoutX="50.0" layoutY="120.0" text="Plantes:" />
+        <Label layoutX="50.0" layoutY="150.0" text="Adreça:" />
+        <Label layoutX="50.0" layoutY="180.0" text="Accessibilitat:" />
+        <Label layoutX="50.0" layoutY="210.0" text="Disponibilitat:" />
+            <Label fx:id="tipE" layoutX="50.0" layoutY="240.0" text="Tipus Entitat:" visible="false" />
+
+
+
+            <ChoiceBox fx:id="tipus" layoutX="160.0" layoutY="60.0" prefWidth="170.0" />
+        <TextField fx:id="nom" layoutX="160.0" layoutY="90.0" />
+        <TextField fx:id="plantes" layoutX="160.0" layoutY="120.0" />
+        <TextField fx:id="adreca" layoutX="160.0" layoutY="150.0" />
+        <ChoiceBox fx:id="accessibilitat" layoutX="160.0" layoutY="180.0" />
+        <ChoiceBox fx:id="disponibilitat" layoutX="160.0" layoutY="210.0" />
+            <TextField fx:id="tipusEntitat" layoutX="160.0" layoutY="240.0" visible="false" />
+
+
+
+        </Pane>
+
+        <Label fx:id="labelOk" />
+        <Button layoutX="344.0" layoutY="305.0" mnemonicParsing="false" onAction="#optBotons" text="Tornar" />
+        <Button layoutX="266.0" layoutY="305.0" mnemonicParsing="false" onAction="#optBotons" text="Següent" />
+        <Button fx:id="ok" layoutX="200.0" layoutY="305.0" mnemonicParsing="false" onAction="#optBotons" text="Ok" />
+
+        <Label layoutX="242.0" layoutY="31.0" text="NOU ESPAI">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+      <Accordion fx:id="acordeon" layoutX="405.0" layoutY="89.0">
+        <panes>
+        </panes>
+      </Accordion>
+        <Accordion fx:id="acordeon2" layoutX="800.0" layoutY="89.0">
+            <panes>
+            </panes>
+        </Accordion>
+
+    </children>
+
+</Pane>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.EspaiVeureController">
+    <children>
+        <TableView fx:id="taulaEspais" layoutX="-1.0" onMouseClicked="#clickItem" prefHeight="350.0" prefWidth="1200.0">
+            <columns>
+                <TableColumn prefWidth="96.0" text="ID">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="id" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn prefWidth="96.0" text="NOM">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="nom" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn minWidth="0.0" prefWidth="144.0" text="ADREÇA">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="adreca" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn minWidth="0.0" prefWidth="155.0" text="TIPUS">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="tipus" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn minWidth="0.0" prefWidth="144.0" text="PLANTES">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="plantes" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn minWidth="0.0" prefWidth="144.0" text="ACCESSIBILITAT">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="accessibilitat" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn minWidth="0.0" prefWidth="144.0" text="DISPONIBILITAT">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="disponibilitat" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn minWidth="0.0" prefWidth="144.0" text="PLACES">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="places" />
+                    </cellValueFactory>
+                </TableColumn>
+
+            </columns>
+        </TableView>
+        <Button layoutX="300.0" layoutY="360.0" mnemonicParsing="false" onAction="#tornaPrincipal" text="Tornar" />
+        <Button fx:id="bEdita" disable="true" layoutX="380.0" layoutY="360.0" onAction="#optBotons" mnemonicParsing="false"  text="Edita" />
+        <Button fx:id="bEsborra" disable="true" layoutX="440.0" layoutY="360.0" onAction="#optBotons" mnemonicParsing="false"  text="Esborra" />
+
+    </children>
+</AnchorPane>

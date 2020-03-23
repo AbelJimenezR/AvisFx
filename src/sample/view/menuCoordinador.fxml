@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.MenuCoordinadorController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu fx:id="menuUser" mnemonicParsing="false" text="Usuaris">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Nou Usuari" />
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Busca Usuari" />
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Veure Usuaris" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Iaios">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Nou Iaio" />
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Busca Iaios" />
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Veure Iaios" />
+          </items>
+        </Menu>
+
+
+
+        <Menu mnemonicParsing="false" text="Espais">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Nou Espai" />
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Busca Espais" />
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Veure Espais" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Sortir">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Tancar Sessió" />
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Sortir" />
+          </items>
+        </Menu>
+        <!--<Menu mnemonicParsing="false" onAction="#menuUsuari" text="Venda">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Venda" />
+          </items>
+        </Menu>-->
+      </menus>
+    </MenuBar>
+    <AnchorPane prefHeight="394.0" prefWidth="640.0">
+      <children>
+        <ImageView fx:id="imageView" fitHeight="260.0" fitWidth="400.0" layoutX="120.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+        </ImageView>
+      </children>
+    </AnchorPane>
+  </children>
+</VBox>

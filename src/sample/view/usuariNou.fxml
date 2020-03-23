@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.UsuariNouController">
+   <children>
+      <Label layoutX="200.0" layoutY="90.0" text="Nom:" />
+      <Label layoutX="200.0" layoutY="170.0" text="Password:" />
+      <Label layoutX="200.0" layoutY="210.0" text="Rol" />
+
+      <TextField fx:id="nom" layoutX="318.0" layoutY="90.0" />
+      <TextField fx:id="pass" layoutX="318.0" layoutY="170.0" />
+      <ChoiceBox fx:id="rol" layoutX="318.0" layoutY="205.0" prefWidth="170.0" />
+      <Label fx:id="labelOk" />
+      <Button layoutX="344.0" layoutY="305.0" mnemonicParsing="false" onAction="#optBotons" text="Tornar" />
+      <Button layoutX="266.0" layoutY="305.0" mnemonicParsing="false" onAction="#optBotons" text="Ok" />
+      <Label layoutX="242.0" layoutY="31.0" text="NOU USUARI">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+
+   </children>
+</Pane>

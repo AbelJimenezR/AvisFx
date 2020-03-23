@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="400" prefWidth="640" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.IaioBuscaController">
+    <children>
+
+        <TextField fx:id="idBusca" layoutX="310.0" layoutY="55.0" onAction="#buscaIaio" />
+        <TextField fx:id="id" disable="true" layoutX="310.0" layoutY="100.0" />
+        <TextField fx:id="nom" editable="false" layoutX="310.0" layoutY="130.0" />
+        <TextField fx:id="edat" editable="false" layoutX="310.0" layoutY="210.0" />
+        <TextField fx:id="incapacitat" editable="false" layoutX="310.0" layoutY="250.0" />
+        <Button layoutX="347.0" layoutY="325.0" mnemonicParsing="false" onAction="#optBotons" text="Tornar" />
+        <Button layoutX="277.0" layoutY="325.0" mnemonicParsing="false" onAction="#optBotons" text="Editar" />
+        <Label layoutX="200.0" layoutY="100.0" text="Id:" />
+        <Label layoutX="200.0" layoutY="130.0" text="Nom:" />
+        <Label layoutX="200.0" layoutY="210.0" text="Edat:" />
+        <Label layoutX="200.0" layoutY="250.0" text="Incapacitat:" />
+        <Label layoutX="132.0" layoutY="60.0" text="Introudeix l'Id del iaio:" />
+        <Label layoutX="203.0" layoutY="22.0" text="BUSCA IAIO">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+    </children>
+</Pane>
