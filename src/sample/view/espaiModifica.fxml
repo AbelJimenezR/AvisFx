@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="500.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.EspaiModificaController">
+    <children>
+        <Pane fx:id="espai" layoutX="20.0" layoutY="38.0">
+            <Label layoutX="50.0" layoutY="60.0" text="Tipus:" />
+            <Label layoutX="50.0" layoutY="90.0" text="Nom:" />
+            <Label layoutX="50.0" layoutY="120.0" text="Plantes:" />
+            <Label layoutX="50.0" layoutY="150.0" text="Adreça:" />
+            <Label layoutX="50.0" layoutY="180.0" text="Accessibilitat:" />
+            <Label layoutX="50.0" layoutY="210.0" text="Disponibilitat:" />
+            <Label fx:id="tipE" layoutX="50.0" layoutY="240.0" text="Tipus Entitat:" visible="false" />
+
+
+
+            <ChoiceBox fx:id="tipus" layoutX="160.0" layoutY="60.0" prefWidth="170.0" />
+            <TextField fx:id="nom" layoutX="160.0" layoutY="90.0" />
+            <TextField fx:id="plantes" layoutX="160.0" layoutY="120.0" />
+            <TextField fx:id="adreca" layoutX="160.0" layoutY="150.0" />
+            <ChoiceBox fx:id="accessibilitat" layoutX="160.0" layoutY="180.0" />
+            <ChoiceBox fx:id="disponibilitat" layoutX="160.0" layoutY="210.0" />
+            <TextField fx:id="tipusEntitat" layoutX="160.0" layoutY="240.0" visible="false" />
+
+
+
+        </Pane>
+
+        <Label fx:id="labelOk" />
+        <Button layoutX="722.0" layoutY="400.0" mnemonicParsing="false" onAction="#optBotons" text="Tornar" />
+        <Button fx:id="ok" layoutX="469.0" layoutY="400.0" mnemonicParsing="false" onAction="#optBotons" text="Ok" />
+
+        <Label layoutX="535.0" layoutY="23.0" text="NOU ESPAI">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+      <TableView fx:id="taulaPlanta" onMouseClicked="#clickItem" layoutX="435.0" layoutY="87.0" prefHeight="200.0" prefWidth="390.0">
+        <columns>
+          <TableColumn fx:id="pl" prefWidth="83.0" style="-fx-alignment: CENTER;" text="PLANTA">
+            <cellValueFactory>
+                <PropertyValueFactory property="planta" />
+            </cellValueFactory>
+          </TableColumn>
+          <TableColumn prefWidth="104.0" style="-fx-alignment: CENTER;" text="SUPERFICIE">
+            <cellValueFactory>
+                <PropertyValueFactory property="superficie" />
+            </cellValueFactory>
+          </TableColumn>
+            <TableColumn prefWidth="75.0" style="-fx-alignment: CENTER;" text="SALES">
+            <cellValueFactory>
+                <PropertyValueFactory property="sales" />
+            </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="121.0" style="-fx-alignment: CENTER;" text="HABITACIONS">
+            <cellValueFactory>
+                <PropertyValueFactory property="habitacions" />
+            </cellValueFactory>
+            </TableColumn>
+        </columns>
+      </TableView>
+      <TableView fx:id="taulaHabitacio" layoutX="879.0" layoutY="87.0" prefHeight="200.0" prefWidth="265.0">
+        <columns>
+            <TableColumn prefWidth="75.0" style="-fx-alignment: CENTER;" text="PLANTA">
+            <cellValueFactory>
+                <PropertyValueFactory property="planta" />
+            </cellValueFactory>
+            </TableColumn>
+          <TableColumn prefWidth="111.0" style="-fx-alignment: CENTER;" text="HABITACIO">
+            <cellValueFactory>
+                <PropertyValueFactory property="habitacio" />
+            </cellValueFactory>
+          </TableColumn>
+          <TableColumn prefWidth="75.0" style="-fx-alignment: CENTER;" text="LLITS">
+            <cellValueFactory>
+                <PropertyValueFactory property="llits" />
+            </cellValueFactory>
+          </TableColumn>
+        </columns>
+      </TableView>
+
+    </children>
+
+</Pane>

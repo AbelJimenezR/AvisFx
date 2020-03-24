@@ -118,8 +118,9 @@ public class MenuCoordinadorController implements Initializable {
 
         if (sItem.equals("Veure Espais")) {
             Parent arrel = FXMLLoader.load(getClass().getResource("..//view//espaiVeure.fxml"));
-
             stage.setTitle("Espais");
+            stage.setX(300);
+            stage.setY(300);
             stage.setScene(new Scene(arrel));
             stage.show();
         }
