@@ -190,24 +190,16 @@ public class EspaiDao implements IEspaiDao {
         return ultimId;
     }
 
-    /*@Override
-    public void actualitzarUsuari(int id, String nom, String password) {
+    @Override
+    public void actualitzaPlanta(Planta p) {
         try {
-            Connection conn = Conexion.conectar();
-            String query = "UPDATE usuari set nom='" + nom + "', password='" + password + "'  where id_usuari='" + id + "'";
+          /*  Connection conn = Conexion.conectar();
+            String query = "UPDATE planta set superficie='" + p.getSuperficie() + "', num_sales='" + p.getNumSales() + "', num_habitacions= '"+ p.getNumHabitacions()
+                    +"'  where id_planta='"+ p.getId() + "' and id_espai='"+ +"'";
             Statement st = conn.createStatement();
             st.execute(query);
             st.close();
-            conn.close();
-
-            for (Usuari u : au) {
-                if (u.getId() == id) {
-                    u.setNom(nom);
-                    u.setPassword(password);
-                    break;
-                }
-            }
-
+            conn.close();*/
 
         } catch (Exception e) {
             System.err.println("Got an exception! ");
@@ -216,6 +208,7 @@ public class EspaiDao implements IEspaiDao {
 
 
     }
+    /*
 
     @Override
     public void eliminarUsuari(int id) {

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="400" prefWidth="640" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controller.EspaiBuscaController">
+    <children>
+
+        <TextField fx:id="idBusca" layoutX="310.0" layoutY="100.0" onAction="#buscaEspai" />
+
+        <Button layoutX="347.0" layoutY="325.0" mnemonicParsing="false" onAction="#optBotons" text="Tornar" />
+        <Button fx:id="Veure" layoutX="277.0" layoutY="325.0" mnemonicParsing="false" onAction="#optBotons" text="Veure" />
+
+        <Label layoutX="132.0" layoutY="100.0" text="Introudeix l'Id de l'espai:" />
+        <Label layoutX="203.0" layoutY="22.0" text="BUSCA ESPAI">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+    </children>
+</Pane>

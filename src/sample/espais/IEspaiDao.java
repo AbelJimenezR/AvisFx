@@ -19,4 +19,6 @@ public interface IEspaiDao {
 
     public void eliminaEspai(int id);
 
+    public void actualitzaPlanta(Planta p);
+
 }

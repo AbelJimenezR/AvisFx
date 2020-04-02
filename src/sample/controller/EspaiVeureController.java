@@ -65,7 +65,7 @@ public class EspaiVeureController implements Initializable {
 
     @FXML
     protected void tornaPrincipal(ActionEvent event) throws IOException {
-        UsuariVeureController.setId();
+        EspaiVeureController.setId();
 
         Button boto = (Button) event.getSource();
         Stage stage = (Stage) boto.getScene().getWindow(); //this accesses the window.
@@ -86,7 +86,9 @@ public class EspaiVeureController implements Initializable {
         if (bot.equals("Edita")) {
 
             Parent arrel = FXMLLoader.load(getClass().getResource("..//view//espaiModifica.fxml"));
-            stage.setTitle("Usuaris");
+            stage.setTitle("ESPAIS");
+            //stage.setX(300);
+            //stage.setY(300);
             stage.setScene(new Scene(arrel));
             stage.show();
 
