@@ -11,7 +11,7 @@ public class Conexion {
         Connection conn;
         try {
             Class.forName(myDriver);
-            conn = DriverManager.getConnection(myUrl, "java", "javatest");
+            conn = DriverManager.getConnection(myUrl, "root", "");
             return conn;
         } catch (Exception e) {
             System.err.println("Got an exception! ");

@@ -15,13 +15,14 @@ public class Main extends Application {
         cd.carregaUsuaris();
         cd.carregaIaios();
         cd.carregaEspais();
+        cd.carregaSuggeriments();
+        cd.carregaHistorial();
 
         Parent root = FXMLLoader.load(getClass().getResource("view/Main.fxml"));
         primaryStage.setTitle("Avis sense llar");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);

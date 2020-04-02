@@ -65,8 +65,6 @@ public class EspaiDao implements IEspaiDao {
 
     }
 
-
-
     @Override
     public boolean crearEspai() {
 

@@ -70,7 +70,6 @@ public class IaioBuscaController implements Initializable {
             idBusca.setText("");
         } else {
 
-
             idold = iaio.getId();
             id.setText(String.valueOf(iaio.getId()));
             nom.setText(iaio.getNom());
