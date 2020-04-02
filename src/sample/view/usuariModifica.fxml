@@ -9,10 +9,12 @@
 
       <TextField fx:id="id" disable="true" layoutX="310.0" layoutY="100.0" />
       <TextField fx:id="nom" layoutX="310.0" layoutY="130.0" />
-      <TextField fx:id="pass" layoutX="310.0" layoutY="210.0" />
+      <PasswordField fx:id="pass_hidden" layoutX="310.0" layoutY="210.0" onKeyReleased="#setPass" />
+      <TextField fx:id="pass" layoutX="310.0" layoutY="210.0" visible="false" />
       <ChoiceBox fx:id="rol" layoutX="310.0" layoutY="245.0" prefWidth="170.0" />
       <Button layoutX="347.0" layoutY="325.0" mnemonicParsing="false" onAction="#optBotons" text="Tornar" />
-      <Button layoutX="277.0" layoutY="325.0" mnemonicParsing="false" onAction="#optBotons" text="Ok" />
+      <Button layoutX="260.0" layoutY="325.0" mnemonicParsing="false" onAction="#optBotons" text="Modifica" />
+      <Button fx:id="veurePass" layoutX="500.0" layoutY="210.0" mnemonicParsing="false" onAction="#showPass" text="Mostra" />
       <Label layoutX="200.0" layoutY="100.0" text="Id:" />
       <Label layoutX="200.0" layoutY="130.0" text="Nom:" />
       <Label layoutX="200.0" layoutY="210.0" text="Password:" />

@@ -40,17 +40,20 @@ public class UsuariVeureController implements Initializable {
         ObservableList<TaulaUsuaris> dades = taulaUsuaris.getItems();
 
         for (Usuari u : au) {
-            dades.add(new TaulaUsuaris(String.valueOf(u.getId()), u.getNom(), u.getPassword(), u.getClass().getSimpleName()));
+            String pass=maskPass(u.getPassword());
+            dades.add(new TaulaUsuaris(String.valueOf(u.getId()), u.getNom(), pass, u.getClass().getSimpleName()));
         }
 
     }
 
     @FXML
     public void clickItem(MouseEvent event) {
-        bEdita.setDisable(false);
-        bEsborra.setDisable(false);
-        id = Integer.parseInt(taulaUsuaris.getSelectionModel().getSelectedItem().getId());
-        System.out.println(id);
+        if(!taulaUsuaris.getSelectionModel().getSelectedCells().isEmpty()) {
+            bEdita.setDisable(false);
+            bEsborra.setDisable(false);
+            id = Integer.parseInt(taulaUsuaris.getSelectionModel().getSelectedItem().getId());
+            System.out.println(id);
+        }
     }
 
     @FXML
@@ -95,6 +98,14 @@ public class UsuariVeureController implements Initializable {
 
     public static void setId() {
         id = 0;
+    }
+
+    private String maskPass(String password) {
+        String output = "";
+        for(int i = 0; i < 10; i++) {
+            output += "\u2022";
+        }
+        return output;
     }
 
 }

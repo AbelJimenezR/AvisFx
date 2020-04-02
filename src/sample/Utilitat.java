@@ -31,4 +31,7 @@ public class Utilitat {
             return GrauIncapacitat.MOLTALT;
         }
     }
+
+
+
 }

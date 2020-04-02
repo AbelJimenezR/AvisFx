@@ -7,10 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import sample.usuaris.UsuarisDao;
@@ -24,7 +21,13 @@ public class UsuariNouController implements Initializable {
     private static int rolUser;
 
     @FXML
-    private TextField nom, pass;
+    private TextField nom,pass;
+
+    @FXML
+    private PasswordField pass_hidden;
+
+    @FXML
+    private Button veurePass;
 
     @FXML
     private ChoiceBox rol;
@@ -62,19 +65,51 @@ public class UsuariNouController implements Initializable {
 
 
         } else if (bot.equals("Ok")) {
-            String d = rol.getValue().toString();
-            String c= d.substring(0,1);
+            if(comprovaDades()) {
+                String d = rol.getValue().toString();
+                String c = d.substring(0, 1);
 
-            UsuarisDao ud = new UsuarisDao();
-            if (ud.crearUsuari(nom.getText(), pass.getText(), Integer.parseInt(c))) {
-                nom.setText("");
-                pass.setText("");
-                rol.setValue(null);
-                labelOk.setText("Usuari afegit correctament");
-                PauseTransition pT = new PauseTransition(Duration.seconds(1));
-                pT.setOnFinished(e -> labelOk.setText(""));
-                pT.play();
+                UsuarisDao ud = new UsuarisDao();
+                if (ud.crearUsuari(nom.getText(), pass.getText(), Integer.parseInt(c))) {
+                    nom.setText("");
+                    pass.setText("");
+                    rol.setValue(null);
+                    labelOk.setText("Usuari afegit correctament");
+                    PauseTransition pT = new PauseTransition(Duration.seconds(1));
+                    pT.setOnFinished(e -> labelOk.setText(""));
+                    pT.play();
+                }
             }
+        }
+    }
+
+    private boolean comprovaDades(){
+        if(nom.getText().isEmpty()||pass.getText().isEmpty()||rol.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Advertència");
+            alert.setHeaderText("Falten dades per introduïr");
+            alert.setContentText("Torna-ho a provar");
+            alert.showAndWait();
+
+            return false;
+        }
+        return true;
+    }
+
+    @FXML
+    private void showPass(ActionEvent event) {
+        Button boto = (Button) event.getSource();
+        String bot = boto.getText();
+        if(bot.equals("Mostra")) {
+            pass_hidden.setVisible(false);
+            pass.setVisible(true);
+            pass.setText(pass_hidden.getText());
+            veurePass.setText("Amaga");
+        }else{
+            pass_hidden.setVisible(true);
+            pass.setVisible(false);
+            //pass.setText(pass_hidden.getText());
+            veurePass.setText("Mostra");
 
         }
     }

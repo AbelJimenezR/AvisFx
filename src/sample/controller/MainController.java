@@ -1,13 +1,12 @@
 package sample.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import sample.Utilitat;
 
@@ -18,7 +17,13 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     @FXML
-    private TextField nom, password;
+    private TextField nom,password;
+
+    @FXML
+    private Button veurePass;
+
+    @FXML
+    private PasswordField pass_hidden;
 
     @FXML
     private static int rol;
@@ -33,6 +38,7 @@ public class MainController implements Initializable {
 
     @FXML
     public void comprovaUsuari() throws IOException {
+        password=pass_hidden;
 
         if (Utilitat.comprovaUsuari(nom.getText(), password.getText()).equals("UsuariCoordinador")) {
             rol = 1;
@@ -57,6 +63,7 @@ public class MainController implements Initializable {
             nom.setText("");
             password.setText("");
             nom.requestFocus();
+            pass_hidden.setText("");
 
         }
 
@@ -76,6 +83,23 @@ public class MainController implements Initializable {
 
     }
 
+    @FXML
+    private void showPass(ActionEvent event) {
+        Button boto = (Button) event.getSource();
+        String bot = boto.getText();
+        if(bot.equals("Mostra")) {
+            pass_hidden.setVisible(false);
+            password.setVisible(true);
+            password.setText(pass_hidden.getText());
+            veurePass.setText("Amaga");
+        }else{
+            pass_hidden.setVisible(true);
+            password.setVisible(false);
+            //pass.setText(pass_hidden.getText());
+            veurePass.setText("Mostra");
+
+        }
+    }
 
 }
 

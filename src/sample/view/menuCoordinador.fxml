@@ -47,7 +47,7 @@
         </Menu>
         <Menu mnemonicParsing="false" text="Sortir">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Tancar Sessi�" />
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Tancar Sessió" />
             <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Sortir" />
           </items>
         </Menu>

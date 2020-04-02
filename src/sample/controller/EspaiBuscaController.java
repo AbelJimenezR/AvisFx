@@ -26,6 +26,7 @@ public class EspaiBuscaController implements Initializable {
     private static int idold;
 
 
+
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
 

@@ -6,9 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import sample.CarregaDadesDao;
 import sample.usuaris.Usuari;
@@ -23,6 +21,12 @@ public class UsuariModificaController implements Initializable {
 
     @FXML
     private TextField id, nom, pass;
+
+    @FXML
+    private PasswordField pass_hidden;
+
+    @FXML
+    private Button veurePass;
 
     @FXML
     private ChoiceBox rol;
@@ -64,12 +68,14 @@ public class UsuariModificaController implements Initializable {
 
         id.setText(String.valueOf(usuari.getId()));
         nom.setText(usuari.getNom());
-        pass.setText(usuari.getPassword());
+        //pass.setText(usuari.getPassword());
+        pass_hidden.setText(usuari.getPassword());
     }
 
 
     @FXML
     protected void optBotons(ActionEvent event) throws IOException {
+
         UsuariVeureController.setId();
         Button boto = (Button) event.getSource();
         Stage stage = (Stage) boto.getScene().getWindow(); //this accesses the window.
@@ -81,17 +87,18 @@ public class UsuariModificaController implements Initializable {
             stage.setScene(new Scene(arrel));
             stage.show();
             UsuariVeureController.setId();
-        } else if (bot.equals("Ok")) {
+        } else if (bot.equals("Modifica")) {
+            if (comprovaDades()){
             String d = rol.getValue().toString();
-            String c= d.substring(0,1);
+            String c = d.substring(0, 1);
             try {
                 if (rolOld == Integer.parseInt(c)) {
                     UsuarisDao ud = new UsuarisDao();
-                    ud.actualitzarUsuari(idold, nom.getText(), pass.getText());
+                    ud.actualitzarUsuari(idold, nom.getText(), pass_hidden.getText());
                 } else {
                     UsuarisDao ud = new UsuarisDao();
                     ud.eliminarUsuari(idold);
-                    ud.crearUsuari(nom.getText(), pass.getText(), Integer.parseInt(c));
+                    ud.crearUsuari(nom.getText(), pass_hidden.getText(), Integer.parseInt(c));
 
 
                 }
@@ -103,6 +110,7 @@ public class UsuariModificaController implements Initializable {
             stage.setTitle("Usuaris");
             stage.setScene(new Scene(arrel));
             stage.show();
+        }
         }
     }
 
@@ -117,5 +125,41 @@ public class UsuariModificaController implements Initializable {
         return null;
     }
 
+    private boolean comprovaDades(){
+        if(nom.getText().isEmpty()||pass.getText().isEmpty()||rol.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Advertència");
+            alert.setHeaderText("Falten dades per introduïr");
+            alert.setContentText("Torna-ho a provar");
+            alert.showAndWait();
+
+            return false;
+        }
+        return true;
+    }
+
+    @FXML
+    private void showPass(ActionEvent event) {
+        Button boto = (Button) event.getSource();
+        String bot = boto.getText();
+        if(bot.equals("Mostra")) {
+            pass_hidden.setVisible(false);
+            pass.setVisible(true);
+            pass.setText(pass_hidden.getText());
+            veurePass.setText("Amaga");
+        }else{
+            pass_hidden.setVisible(true);
+            pass.setVisible(false);
+            veurePass.setText("Mostra");
+            pass_hidden.setText(pass.getText());
+
+
+        }
+    }
+
+    @FXML
+    private void setPass(){
+        pass.setText(pass_hidden.getText());
+    }
 
 }

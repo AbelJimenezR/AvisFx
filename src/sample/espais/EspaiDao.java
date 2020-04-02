@@ -69,22 +69,17 @@ public class EspaiDao implements IEspaiDao {
 
     @Override
     public boolean crearEspai() {
-
+        int idEspai = ultimId()+1;
         try {
             Connection conn = Conexion.conectar();
-            String query = "INSERT into espai(nom,num_plantes,adreca,accessibilitat,num_Places,disponibilitat,tipus_Entitat)" +
-                    " values ('" + nom + "','" + numPlantes + "','" + adreca + "', '" + accessibilitat + "', '" + numPlaces + "','" + disponibilitat + "','" + tipusEntitat + "')";
+            String query = "INSERT into espai(id_espai,nom,num_plantes,adreca,accessibilitat,num_Places,disponibilitat,tipus_Entitat)" +
+                    " values ('" + idEspai + "','" + nom + "','" + numPlantes + "','" + adreca + "', '" + accessibilitat + "', '" + numPlaces + "','" + disponibilitat + "','" + tipusEntitat + "')";
             Statement st = conn.createStatement();
             st.execute(query);
             st.close();
 
-            id = ultimId();
-           /*query = "Select id_espai from espai order by id_espai desc limit 1";
-           st = conn.createStatement();
-           ResultSet rs = st.executeQuery(query);
-           while (rs.next()) {
-               id = rs.getInt("id_espai");
-           }*/
+            //id = ultimId();
+
 
         } catch (Exception e) {
             System.err.println("Got an exception! a");
@@ -92,7 +87,7 @@ public class EspaiDao implements IEspaiDao {
         }
 
 
-        crearPlanta(id);
+        crearPlanta(idEspai);
         return true;
     }
 

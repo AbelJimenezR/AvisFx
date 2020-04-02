@@ -22,6 +22,9 @@ public class UsuariBuscaController implements Initializable {
 
     @FXML
     private TextField id, nom, pass, rol, idBusca;
+
+    @FXML
+    private Button editar;
     private Usuari usuari;
     private static int rolOld, idold;
 
@@ -54,43 +57,51 @@ public class UsuariBuscaController implements Initializable {
     }
 
     public void buscaUsuari() {
-        int i = Integer.parseInt(idBusca.getText());
-        ArrayList<Usuari> au = CarregaDadesDao.getLlistaUsuaris();
-        for (Usuari u : au) {
-            if (u.getId() == i) {
-                usuari = u;
-                break;
+        if (idBusca.getText().isEmpty() || idBusca.getText().matches("\\d*")) {
+            int i = Integer.parseInt(idBusca.getText());
+            ArrayList<Usuari> au = CarregaDadesDao.getLlistaUsuaris();
+            for (Usuari u : au) {
+                if (u.getId() == i) {
+                    usuari = u;
+                    break;
+                }
             }
-        }
-        if (usuari == null) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Advertència");
-            alert.setHeaderText("No s'ha trobat cap usuari");
-            alert.setContentText("Torna-ho a provar");
-            alert.showAndWait();
-            idBusca.setText("");
-        } else {
-            if (usuari.getClass().getSimpleName().equals("Usuari")) {
-                rol.setText("3");
-                rolOld = 3;
-            } else if (usuari.getClass().getSimpleName().equals("UsuariGestor")) {
-                rol.setText("2");
-                rolOld = 2;
-            } else {
-                rol.setText("1");
-                rolOld = 1;
-            }
+            if (usuari == null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Advertència");
+                alert.setHeaderText("No s'ha trobat cap usuari");
+                alert.setContentText("Torna-ho a provar");
+                alert.showAndWait();
 
-            idold = usuari.getId();
-            id.setText(String.valueOf(usuari.getId()));
-            nom.setText(usuari.getNom());
-            pass.setText(usuari.getPassword());
+            } else {
+                if (usuari.getClass().getSimpleName().equals("Usuari")) {
+                    rol.setText("3");
+                    rolOld = 3;
+                } else if (usuari.getClass().getSimpleName().equals("UsuariGestor")) {
+                    rol.setText("2");
+                    rolOld = 2;
+                } else {
+                    rol.setText("1");
+                    rolOld = 1;
+                }
+
+                idold = usuari.getId();
+                id.setText(String.valueOf(usuari.getId()));
+                nom.setText(usuari.getNom());
+                pass.setText(usuari.getPassword());
+            }
+            editar.isFocused();
+            idBusca.setText("");
+            usuari=null;
         }
     }
-
     public static int getId() {
         return idold;
     }
 
+    /*private boolean comprovaDades(){
+        if(){
 
+        }
+    }*/
 }
