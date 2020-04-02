@@ -22,9 +22,6 @@
             <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Veure Iaios" />
           </items>
         </Menu>
-
-
-
         <Menu mnemonicParsing="false" text="Espais">
           <items>
             <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Nou Espai" />
@@ -32,9 +29,25 @@
             <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Veure Espais" />
           </items>
         </Menu>
+        <Menu fx:id="menuSuggeriment" mnemonicParsing="false" text="Suggeriments">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Nou Suggeriment" />
+            <MenuItem fx:id="menuVeureSuggeriment" mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Veure Suggeriments" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Historial">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Veure Historial" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Disponibilitat">
+          <items>
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Veure Disponibilitat" />
+          </items>
+        </Menu>
         <Menu mnemonicParsing="false" text="Sortir">
           <items>
-            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Tancar Sessió" />
+            <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Tancar Sessi�" />
             <MenuItem mnemonicParsing="false" onAction="#menuUsuariCoordinador" text="Sortir" />
           </items>
         </Menu>

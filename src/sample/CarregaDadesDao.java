@@ -1,6 +1,8 @@
 package sample;
 
 import sample.espais.*;
+import sample.historial.*;
+import sample.suggeriment.*;
 import sample.iaios.GrauIncapacitat;
 import sample.iaios.Iaio;
 import sample.usuaris.Usuari;
@@ -10,11 +12,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class CarregaDadesDao implements ICarregaDadesDao {
     private static ArrayList<Usuari> llistaUsuaris = new ArrayList<Usuari>();
     private static ArrayList<Iaio> llistaIaios = new ArrayList<Iaio>();
     private static ArrayList<Espai> llistaEspais = new ArrayList<Espai>();
+    private static ArrayList<Suggeriment> llistaSuggeriments = new ArrayList<Suggeriment>();
+    private static ArrayList<Historial> llistaHistorial = new ArrayList<Historial>();
     private ArrayList<ArrayList> planta = new ArrayList<>();
     private ArrayList<ArrayList> habitacion = new ArrayList<>();
 
@@ -91,7 +96,6 @@ public class CarregaDadesDao implements ICarregaDadesDao {
             System.err.println(e.getMessage());
         }
     }
-
 
     @Override
     public void carregaEspais() {
@@ -201,8 +205,67 @@ public class CarregaDadesDao implements ICarregaDadesDao {
 
     }
 
+    public void carregaSuggeriments() {
+    	try {
 
-public void cE(){
+            Connection conn = Conexion.conectar();
+            String query = "SELECT * FROM suggeriment";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+
+                int idE = rs.getInt("id_espai");
+                int idP = rs.getInt("id_planta");
+                int idH = rs.getInt("id_habitacio");
+                String nomI = rs.getString("nom_iaio");
+                int idI = rs.getInt("id_iaio");
+                Date dE = rs.getDate("data_entrada");
+                Date dS = rs.getDate("data_sortida");
+
+                llistaSuggeriments.add(new Suggeriment(idE, idP, idH, nomI, idI, dE, dS));
+
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void carregaHistorial() {
+    	try {
+
+            Connection conn = Conexion.conectar();
+            String query = "SELECT * FROM historial";
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+
+                int idE = rs.getInt("id_espai");
+                int idP = rs.getInt("id_planta");
+                int idH = rs.getInt("id_habitacio");
+                String nomI = rs.getString("nom_iaio");
+                int idI = rs.getInt("id_iaio");
+                Date dE = rs.getDate("d_Entrada");
+                Date dS = rs.getDate("d_Sortida");
+
+                llistaHistorial.add(new Historial(idE, idP, idH, nomI, idI, dE, dS));
+
+            }
+            rs.close();
+            st.close();
+            conn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+    }
+
+    public void cE(){
         if(tipusEntitat.equals("null")) {
             ep = new EspaiPropietari(idEspai, adreca, access, disp, numPlantes, nom);
         }else{
@@ -260,8 +323,6 @@ break;
         //System.out.println(ep);
     }
 
-
-
     public static ArrayList<Usuari> getLlistaUsuaris() {
         return llistaUsuaris;
     }
@@ -285,6 +346,27 @@ break;
     public static void setLlistaEspais(ArrayList<Espai> llistaEspais) {
         CarregaDadesDao.llistaEspais = llistaEspais;
     }
+
+
+	public static ArrayList<Suggeriment> getLlistaSuggeriments() {
+		return llistaSuggeriments;
+	}
+
+
+	public static void setLlistaSuggeriments(ArrayList<Suggeriment> llistaSuggeriments) {
+		CarregaDadesDao.llistaSuggeriments = llistaSuggeriments;
+	}
+
+
+	public static ArrayList<Historial> getLlistaHistorial() {
+		return llistaHistorial;
+	}
+
+
+	public static void setLlistaHistorial(ArrayList<Historial> llistaHistorial) {
+		CarregaDadesDao.llistaHistorial = llistaHistorial;
+	}
+
 
 
 }

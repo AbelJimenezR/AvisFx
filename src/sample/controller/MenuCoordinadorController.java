@@ -21,7 +21,10 @@ public class MenuCoordinadorController implements Initializable {
     private static int rolUser;
 
     @FXML
-    Menu menuUser;
+    Menu menuUser, menuSuggeriment;
+
+    @FXML
+    MenuItem menuVeureSuggeriment;
 
     @FXML
     private ImageView imageView;
@@ -31,6 +34,11 @@ public class MenuCoordinadorController implements Initializable {
         rolUser = MainController.getRol();
         if (rolUser != 1) {
             menuUser.setVisible(false);
+            menuVeureSuggeriment.setVisible(false);
+        }
+
+        if (rolUser == 3) {
+        	menuSuggeriment.setVisible(false);
         }
 
         Image image = null;
@@ -125,8 +133,37 @@ public class MenuCoordinadorController implements Initializable {
             stage.show();
         }
 
-        //TANCA SESIÓ*********************/
-        if (sItem.equals("Tancar Sessió")) {
+      //MENU SUGGRIMENTS//
+        if (sItem.equals("Nou Suggeriment")) {
+            Parent arrel = FXMLLoader.load(getClass().getResource("..//view//suggerimentNou.fxml"));
+            stage.setTitle("Suggeriments");
+            stage.setScene(new Scene(arrel));
+            stage.show();
+        }
+
+        if (sItem.equals("Veure Suggeriments")) {
+            Parent arrel = FXMLLoader.load(getClass().getResource("..//view//suggerimentVeure.fxml"));
+            stage.setTitle("Espais");
+            stage.setScene(new Scene(arrel));
+            stage.show();
+        }
+
+        if (sItem.equals("Veure Historial")) {
+            Parent arrel = FXMLLoader.load(getClass().getResource("..//view//historial.fxml"));
+            stage.setTitle("Historial");
+            stage.setScene(new Scene(arrel));
+            stage.show();
+        }
+
+        if (sItem.equals("Veure Disponibilitat")) {
+            Parent arrel = FXMLLoader.load(getClass().getResource("..//view//disponibilitat.fxml"));
+            stage.setTitle("Disponibilitat");
+            stage.setScene(new Scene(arrel));
+            stage.show();
+        }
+
+        //TANCA SESSI�*********************/
+        if (sItem.equals("Tancar Sessio")) {
             Parent arrel = FXMLLoader.load(getClass().getResource("..//view//Main.fxml"));
 
             stage.setTitle("Avis sense Llar");

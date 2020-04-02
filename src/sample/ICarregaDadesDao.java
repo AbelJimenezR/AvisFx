@@ -8,5 +8,8 @@ public interface ICarregaDadesDao {
 
     public void carregaIaios();
 
+    public void carregaSuggeriments();
+
+    public void carregaHistorial();
 }
 
