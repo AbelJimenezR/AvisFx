@@ -63,8 +63,12 @@ public abstract class Espai {
 		this.id = id;
 	}
 
-	public void setNumPlantes() {
-		this.numPlantes = this.plantes.size();
+	public void setNumPlantes(int plantes) {
+		this.numPlantes = plantes;
+		this.plantes.clear();
+		for(int a=0;a<numPlantes;a++){
+			this.plantes.add(new Planta());
+		}
 	}
 
 	public void setAdreca(String adreca) {
@@ -84,7 +88,7 @@ public abstract class Espai {
 	}
 
 	public void setNumPlaces(){
-
+		numPlaces=0;
 		for (int i = 0; i < plantes.size(); i++) {
 			for (int j = 0; j < plantes.get(i).getHabitacions().size(); j++) {
 				this.numPlaces = this.numPlaces + plantes.get(i).getHabitacions().get(j).getNumLlits();

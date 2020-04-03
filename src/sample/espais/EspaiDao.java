@@ -2,8 +2,6 @@ package sample.espais;
 
 import sample.CarregaDadesDao;
 import sample.Conexion;
-import sample.usuaris.Usuari;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -165,6 +163,7 @@ public class EspaiDao implements IEspaiDao {
         }
 
     }
+
     public static int ultimId() {
         int ultimId = 0;
         Connection conn = Conexion.conectar();
@@ -186,81 +185,112 @@ public class EspaiDao implements IEspaiDao {
     }
 
     @Override
-    public void actualitzaPlanta(Planta p) {
-        try {
-          /*  Connection conn = Conexion.conectar();
-            String query = "UPDATE planta set superficie='" + p.getSuperficie() + "', num_sales='" + p.getNumSales() + "', num_habitacions= '"+ p.getNumHabitacions()
-                    +"'  where id_planta='"+ p.getId() + "' and id_espai='"+ +"'";
-            Statement st = conn.createStatement();
-            st.execute(query);
-            st.close();
-            conn.close();*/
-
-        } catch (Exception e) {
-            System.err.println("Got an exception! ");
-            System.err.println(e.getMessage());
-        }
-
-
-    }
-    /*
-
-    @Override
-    public void eliminarUsuari(int id) {
-        try {
-            Connection conn = Conexion.conectar();
-            String query = "DELETE from usuari where id_usuari='" + id + "'";
-            Statement st = conn.createStatement();
-            st.execute(query);
-            st.close();
-            conn.close();
-            for (Usuari u : au) {
-                if (u.getId() == id) {
-                    au.remove(u);
-                    break;
+    public void actualitzaPlanta(Espai ep) {
+            int id_espai=ep.getId();
+            ArrayList<Planta> llPanta = ep.getPlantes();
+            for(Planta p: llPanta) {
+               int id_planta =p.getId();
+                double superficie = p.getSuperficie();
+                int num_sales= p.getNumSales();
+                int num_hab= p.getNumHabitacions();
+                try {
+                    Connection conn = Conexion.conectar();
+                    String query = "INSERT into planta(id_planta,superficie,num_sales,num_habitacions,id_espai) " +
+                            "values ('"+id_planta+"','"+superficie+"','"+num_sales+"','"+num_hab+"','"+id_espai+"')";
+                    Statement st = conn.createStatement();
+                    st.execute(query);
+                    st.close();
+                    conn.close();
+                    actualitzaHabitacio(ep,p);
+                } catch (Exception e) {
+                    System.err.println("Got an exception! ");
+                    System.err.println(e.getMessage());
                 }
             }
 
-        } catch (Exception e) {
-            System.err.println("Got an exception! b");
-            System.err.println(e.getMessage());
+    }
+
+    @Override
+    public void actualitzaHabitacio(Espai es, Planta p){
+        int id_espai=es.getId();
+        int id_planta=p.getId();
+
+        ArrayList<Habitacio> llHab = p.getHabitacions();
+        for( Habitacio h : llHab){
+            int id_hab= h.getId();
+            int num_llits= h.getNumLlits();
+            h.getNumLlits();
+            try {
+                Connection conn = Conexion.conectar();
+                String query = "INSERT into habitacio(id_habitacio,num_llits,id_planta,id_espai) " +
+                        "values ('"+id_hab+"','"+num_llits+"','"+id_planta+"','"+id_espai+"')";
+                Statement st = conn.createStatement();
+                st.execute(query);
+                st.close();
+                conn.close();
+            } catch (Exception e) {
+                System.err.println("Got an exception! ");
+                System.err.println(e.getMessage());
+            }
+
+
 
         }
 
     }
 
     @Override
-    public void llistarUsuari() {
+    public void actualitzaEspai(Espai ep) {
+            String nom=null;
+            String tipusEntitat=null;
+            int id= ep.getId();
+            int numPlaces= ep.getNumPlaces();
+            int acces = (ep.getAccessibilitat()) ? 1 : 0;
+            String adreca =ep.getAdreca();
+            int numPlantes = ep.getNumPlantes();
+            int disponibilitat=1;
 
-    }
+            if(ep.getClass().getSimpleName().equals("EspaiEntitat")){
+                EspaiEntitat ee = (EspaiEntitat) ep;
+                nom= ee.getNomEntitat();
+                tipusEntitat=ee.getTipusEntitat();
+            }else{
+                EspaiPropietari epr = (EspaiPropietari) ep;
+                nom= epr.getNomPropietari();
+            }
 
-    @Override
-    public void buscarUsuari(Usuari usuari) {
+
+            try {
+                Connection conn = Conexion.conectar();
+                String query = "DELETE FROM espai where id_espai= '"+id+"'";
+                Statement st = conn.createStatement();
+                st.execute(query);
+                st.close();
+                conn.close();
+
+            } catch (Exception e) {
+                System.err.println("Got an exception! ");
+                System.err.println(e.getMessage());
+            }
 
         try {
             Connection conn = Conexion.conectar();
-            String query = "SELECT * from usuari where id_usuari = '" + id + "'";
+            String query = "INSERT into espai(id_espai,nom,num_plantes,adreca,accessibilitat,num_Places,disponibilitat,tipus_entitat)" +
+                    " values ('" + id + "','" + nom + "','" + numPlantes + "','" + adreca + "', '" + acces + "', '" + numPlaces + "','" + disponibilitat + "' ,'"+ tipusEntitat +"' )";
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery(query);
-
-            while (rs.next()) {
-                int idUsuari = rs.getInt("id_usuari");
-                String nom = rs.getString("nom");
-                String password = rs.getString("password");
-                int rol = rs.getInt("rol");
-                System.out.format("%s, %s, %s, %s\n", idUsuari, nom, password, rol);
-
-            }
-
-            rs.close();
+            st.execute(query);
             st.close();
-            conn.close();
+            actualitzaPlanta(ep);
+
 
         } catch (Exception e) {
-            System.err.println("Got an exception! c");
+            System.err.println("Got an exception! a");
             System.err.println(e.getMessage());
         }
 
+
     }
-*/
+
+
+
 }

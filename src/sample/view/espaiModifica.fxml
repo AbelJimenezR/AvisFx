@@ -20,10 +20,10 @@
 
             <ChoiceBox fx:id="tipus" layoutX="160.0" layoutY="60.0" prefWidth="170.0" />
             <TextField fx:id="nom" layoutX="160.0" layoutY="90.0" />
-            <TextField fx:id="plantes" layoutX="160.0" layoutY="120.0" />
+            <TextField fx:id="plantes" layoutX="160.0" layoutY="120.0" editable="false"/>
             <TextField fx:id="adreca" layoutX="160.0" layoutY="150.0" />
             <ChoiceBox fx:id="accessibilitat" layoutX="160.0" layoutY="180.0" />
-            <ChoiceBox fx:id="disponibilitat" layoutX="160.0" layoutY="210.0" />
+            <ChoiceBox fx:id="disponibilitat" disable="true" layoutX="160.0" layoutY="210.0" />
             <TextField fx:id="tipusEntitat" layoutX="160.0" layoutY="240.0" visible="false" />
 
 
@@ -34,36 +34,37 @@
         <Button layoutX="722.0" layoutY="400.0" mnemonicParsing="false" onAction="#optBotons" text="Tornar" />
         <Button fx:id="ok" layoutX="469.0" layoutY="400.0" mnemonicParsing="false" onAction="#optBotons" text="Ok" />
 
-        <Label layoutX="535.0" layoutY="23.0" text="NOU ESPAI">
+        <Label layoutX="535.0" layoutY="23.0" text="MODIFICAR ESPAI">
             <font>
                 <Font size="24.0" />
             </font>
         </Label>
-      <TableView fx:id="taulaPlanta" onMouseClicked="#clickItem" layoutX="435.0" layoutY="87.0" prefHeight="200.0" prefWidth="390.0">
+      <TableView fx:id="taulaPlanta" editable="true" layoutX="412.0" layoutY="87.0" onMouseClicked="#clickItem" prefHeight="200.0" prefWidth="429.0">
         <columns>
           <TableColumn fx:id="pl" prefWidth="83.0" style="-fx-alignment: CENTER;" text="PLANTA">
             <cellValueFactory>
                 <PropertyValueFactory property="planta" />
             </cellValueFactory>
           </TableColumn>
-          <TableColumn prefWidth="104.0" style="-fx-alignment: CENTER;" text="SUPERFICIE">
+          <TableColumn fx:id="sup" prefWidth="104.0" style="-fx-alignment: CENTER;" text="SUPERFICIE">
             <cellValueFactory>
                 <PropertyValueFactory property="superficie" />
             </cellValueFactory>
           </TableColumn>
-            <TableColumn prefWidth="75.0" style="-fx-alignment: CENTER;" text="SALES">
+            <TableColumn fx:id="sales" prefWidth="75.0" style="-fx-alignment: CENTER;" text="SALES">
             <cellValueFactory>
                 <PropertyValueFactory property="sales" />
             </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="121.0" style="-fx-alignment: CENTER;" text="HABITACIONS">
+            <TableColumn fx:id="hab" prefWidth="121.0" style="-fx-alignment: CENTER;" text="HABITACIONS">
             <cellValueFactory>
                 <PropertyValueFactory property="habitacions" />
             </cellValueFactory>
             </TableColumn>
+
         </columns>
       </TableView>
-      <TableView fx:id="taulaHabitacio" layoutX="879.0" layoutY="87.0" prefHeight="200.0" prefWidth="265.0">
+      <TableView fx:id="taulaHabitacio" editable="true" layoutX="879.0" layoutY="87.0" prefHeight="200.0" prefWidth="265.0">
         <columns>
             <TableColumn prefWidth="75.0" style="-fx-alignment: CENTER;" text="PLANTA">
             <cellValueFactory>
@@ -75,13 +76,14 @@
                 <PropertyValueFactory property="habitacio" />
             </cellValueFactory>
           </TableColumn>
-          <TableColumn prefWidth="75.0" style="-fx-alignment: CENTER;" text="LLITS">
+          <TableColumn fx:id="llits" prefWidth="75.0" style="-fx-alignment: CENTER;" text="LLITS">
             <cellValueFactory>
                 <PropertyValueFactory property="llits" />
             </cellValueFactory>
           </TableColumn>
         </columns>
       </TableView>
+      <Button layoutX="812.0" layoutY="291.0" mnemonicParsing="false" onAction="#addPlant" text="+" />
 
     </children>
 

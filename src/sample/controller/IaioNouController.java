@@ -7,10 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import sample.iaios.IaioDao;
@@ -61,8 +58,9 @@ public class IaioNouController implements Initializable {
 
 
         } else if (bot.equals("Ok")) {
-            String d = incapacitat.getValue().toString();
-            String c= d.substring(0,1);
+            if (comprovaDades()){
+                String d = incapacitat.getValue().toString();
+            String c = d.substring(0, 1);
 
             IaioDao id = new IaioDao();
             if (id.crearIaio(nom.getText(), Integer.parseInt(edat.getText()), Integer.parseInt(c))) {
@@ -74,8 +72,22 @@ public class IaioNouController implements Initializable {
                 pT.setOnFinished(e -> labelOk.setText(""));
                 pT.play();
             }
-
         }
+        }
+    }
+
+
+    private boolean comprovaDades(){
+        if(nom.getText().isEmpty()||(edat.getText().isEmpty()||!edat.getText().matches("\\d*"))||incapacitat.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Advertència");
+            alert.setHeaderText("Falten dades per introduïr");
+            alert.setContentText("Torna-ho a provar");
+            alert.showAndWait();
+
+            return false;
+        }
+        return true;
     }
 }
 

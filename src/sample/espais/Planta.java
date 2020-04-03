@@ -52,6 +52,7 @@ public class Planta {
 
 	public void setNumHabitacions(int numHabitacions) {
 		this.numHabitacions = numHabitacions;
+		this.habitacions.clear();
 		for(int i=0;i<numHabitacions;i++){
 			this.habitacions.add(new Habitacio());
 		}

@@ -10,39 +10,52 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import sample.CarregaDadesDao;
 import sample.espais.*;
+
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
-public class EspaiModificaController  implements Initializable {
+
+public class EspaiModificaController implements Initializable {
 
     ArrayList<ArrayList> planta = new ArrayList<ArrayList>();
     ArrayList<ArrayList> habitacion = new ArrayList<ArrayList>();
     ArrayList<Espai> llistaEspais = new ArrayList<>();
     ArrayList<Planta> llPlanta = new ArrayList<>();
     ArrayList<Habitacio> llHab = new ArrayList<>();
-    Boolean access,disp;
+    Boolean access, disp;
     Espai ep;
-    int id;
+    int id, plantOld, habOld;
+    ObservableList<TaulaPlanta> dades;
+    ObservableList<TaulaHabitacio> dadesHab;
+
 
     @FXML
     private TableView<TaulaPlanta> taulaPlanta;
 
     @FXML
-    private TableColumn pl;
+    private TableColumn<TaulaPlanta, String> sup, sales;
+
+    @FXML
+    private TableColumn<TaulaHabitacio, String> llits;
+
 
     @FXML
     private TableView<TaulaHabitacio> taulaHabitacio;
 
     @FXML
-    ChoiceBox tipus,accessibilitat, disponibilitat;
+    ChoiceBox tipus, accessibilitat, disponibilitat;
 
     @FXML
-    private TextField nom, plantes, adreca,tipusEntitat;
+    private TextField nom, plantes, adreca, tipusEntitat;
 
     @FXML
     private Label tipE;
@@ -50,28 +63,28 @@ public class EspaiModificaController  implements Initializable {
     @FXML
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        for(int x=1;x<3;x++){
-            if(x==1){
+        for (int x = 1; x < 3; x++) {
+            if (x == 1) {
                 disponibilitat.getItems().add("SÍ");
 
-            }else {
+            } else {
                 disponibilitat.getItems().add("NO");
             }
         }
 
-        for(int x=1;x<3;x++){
-            if(x==1){
+        for (int x = 1; x < 3; x++) {
+            if (x == 1) {
                 accessibilitat.getItems().add("SÍ");
 
-            }else {
+            } else {
                 accessibilitat.getItems().add("NO");
             }
         }
 
-        for(int x=1;x<3;x++){
-            if(x==1){
+        for (int x = 1; x < 3; x++) {
+            if (x == 1) {
                 tipus.getItems().add("PROPIETARI");
-            }else {
+            } else {
                 tipus.getItems().add("ENTITAT");
             }
         }
@@ -80,10 +93,10 @@ public class EspaiModificaController  implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number number, Number number2) {
                 String a = tipus.getItems().get((Integer) number2).toString();
-                if(a.equals("PROPIETARI")) {
+                if (a.equals("PROPIETARI")) {
                     tipE.setVisible(false);
                     tipusEntitat.setVisible(false);
-                }else{
+                } else {
                     tipE.setVisible(true);
                     tipusEntitat.setVisible(true);
                 }
@@ -91,7 +104,7 @@ public class EspaiModificaController  implements Initializable {
         });
 
         espai();
-
+        addButtonToTable();
     }
 
     @FXML
@@ -110,101 +123,107 @@ public class EspaiModificaController  implements Initializable {
             stage.show();
 
 
-        } else if(bot.equals("Ok")){
-            access= (accessibilitat.getValue().toString().equals("SÍ"))? true:false;
-            disp= (disponibilitat.getValue().toString().equals("SÍ"))? true:false;
+        } else if (bot.equals("Ok")) {
+            access = (accessibilitat.getValue().toString().equals("SÍ")) ? true : false;
+            disp = (disponibilitat.getValue().toString().equals("SÍ")) ? true : false;
 
+            if (ep.getClass().getSimpleName().equals("EspaiPropietari")) {
+                EspaiPropietari esp = (EspaiPropietari) ep;
+                esp.setNomPropietari(nom.getText());
+                esp.setNumPlantes(Integer.parseInt(plantes.getText()));
+                esp.setAdreca(adreca.getText());
+                esp.setAccessibilitat(access);
+            } else {
+                EspaiEntitat esp = (EspaiEntitat) ep;
+                esp.setNomEntitat(nom.getText());
+                esp.setNumPlantes(Integer.parseInt(plantes.getText()));
+                esp.setAdreca(adreca.getText());
+                esp.setAccessibilitat(access);
+            }
 
-          /*  if(tipus.getValue().toString().equals("PROPIETARI")) {
-                ep = new EspaiPropietari(id, adreca.getText(), access, disp, Integer.parseInt(plantes.getText()), nom.getText());
-            }else{
-                ep = new EspaiEntitat(id, adreca.getText(), access, disp, Integer.parseInt(plantes.getText()), nom.getText(),tipusEntitat.getText());
-            }*/
+            List<TaulaPlanta> a = taulaPlanta.getItems();
+            List<TaulaHabitacio> b = taulaHabitacio.getItems();
+
             ArrayList<Planta> ap = ep.getPlantes();
-            int pl=0;
-            for(Planta p : ap){
-              /*  p.setSuperficie(taulaPlanta.getItems().indexOf(0).);
-                EspaiDao ed=new EspaiDao();
-                ed.actualitzaPlanta(p);*/
+            int pl = 0;
+            int hb = 0;
+            try {
+                for (Planta p : ap) {
 
-               /* p.setSuperficie(Double.parseDouble(planta.get(pl).get(0).toString()));
-                p.setNumSales(Integer.parseInt(planta.get(pl).get(1).toString()));
-                p.setNumHabitacions(Integer.parseInt(planta.get(pl).get(2).toString()));
-                ArrayList<Habitacio> h =p.getHabitacions();*/
-                /*for(Habitacio hab : h) {
-                    hab.setId(hb+1);
-                    for(int x = 0,j=0;x<habitacion.size();x++){
-                        if((pl+1)==Integer.parseInt(habitacion.get(x).get(0).toString())) {
-                            if (Integer.parseInt(habitacion.get(x).get(1).toString()) == (hb + 1)) {
-                                hab.setNumLlits(Integer.parseInt(habitacion.get(x).get(2).toString()));
+                    p.setId(Integer.parseInt(a.get(pl).getPlanta()));
+                    p.setSuperficie(Double.parseDouble(a.get(pl).getSuperficie()));
+                    p.setNumHabitacions(Integer.parseInt(a.get(pl).getHabitacions()));
+                    p.setNumSales(Integer.parseInt(a.get(pl).getSales()));
+                    pl++;
 
-                            }
-                            j=j+1;
-
-                        }
+                    ArrayList<Habitacio> h = p.getHabitacions();
+                    for (Habitacio hab : h) {
+                        hab.setId(Integer.parseInt(b.get(hb).getHabitacio()));
+                        hab.setNumLlits(Integer.parseInt(b.get(hb).getLlits()));
+                        hb++;
                     }
-                    hb=hb+1;
-                }*/
-                pl=pl+1;
-            }
-            ep.setNumPlaces();
 
-            if(ep.getClass().getSimpleName().toString().equals("EspaiPropietari")){
-                EspaiDao ed = new EspaiDao((EspaiPropietari) ep);
-                ed.crearEspai();
-            }else{
-                EspaiDao ed = new EspaiDao((EspaiEntitat) ep);
-                ed.crearEspai();
-            }
-            System.out.println(ep);
+                    ep.setNumPlaces();
 
+                }
+                EspaiDao ed = new EspaiDao();
+                ed.actualitzaEspai(ep);
+
+            } catch (Exception NumberFormatException) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Advertència");
+                alert.setHeaderText("Format incorrecte");
+                alert.setContentText("Torna-ho a provar");
+                alert.showAndWait();
+            }
         }
-
     }
 
-    public void espai(){
+    public void espai() {
 
         if (EspaiVeureController.getId() != 0) {
             id = EspaiVeureController.getId();
         } else {
-            id  = EspaiBuscaController.getId();
+            id = EspaiBuscaController.getId();
         }
 
 
         ep = buscaEspai(id);
 
-        if(ep.getClass().getSimpleName().equals("EspaiPropietari")){
+        if (ep.getClass().getSimpleName().equals("EspaiPropietari")) {
             EspaiPropietari ePr = (EspaiPropietari) ep;
-            llPlanta=ePr.getPlantes();
+            llPlanta = ePr.getPlantes();
             tipus.getSelectionModel().select(0);
             nom.setText(ePr.getNomPropietari());
             plantes.setText(String.valueOf(ePr.getNumPlantes()));
+            plantOld = ePr.getNumPlantes();
             adreca.setText(ePr.getAdreca());
-            if(ePr.getDisponibilitat()){
+            if (ePr.getDisponibilitat()) {
                 disponibilitat.getSelectionModel().select(0);
-            }else{
+            } else {
                 disponibilitat.getSelectionModel().select(1);
             }
-            if(ePr.getAccessibilitat()){
+            if (ePr.getAccessibilitat()) {
                 accessibilitat.getSelectionModel().select(0);
-            }else{
+            } else {
                 accessibilitat.getSelectionModel().select(1);
             }
-        }else{
+        } else {
             EspaiEntitat eEn = (EspaiEntitat) ep;
-            llPlanta=eEn.getPlantes();
+            llPlanta = eEn.getPlantes();
             tipus.getSelectionModel().select(1);
             nom.setText(eEn.getNomEntitat());
             plantes.setText(String.valueOf(eEn.getNumPlantes()));
+            plantOld = eEn.getNumPlantes();
             adreca.setText(eEn.getAdreca());
-            if(eEn.getDisponibilitat()){
+            if (eEn.getDisponibilitat()) {
                 disponibilitat.getSelectionModel().select(0);
-            }else{
+            } else {
                 disponibilitat.getSelectionModel().select(1);
             }
-            if(eEn.getAccessibilitat()){
+            if (eEn.getAccessibilitat()) {
                 accessibilitat.getSelectionModel().select(0);
-            }else{
+            } else {
                 accessibilitat.getSelectionModel().select(1);
             }
             tipusEntitat.setText(eEn.getTipusEntitat());
@@ -213,49 +232,34 @@ public class EspaiModificaController  implements Initializable {
         planta();
     }
 
-    public void planta(){
+    public void planta() {
 
         ArrayList<Planta> ap = ep.getPlantes();
-        ObservableList<TaulaPlanta> dades = taulaPlanta.getItems();
+        dades = taulaPlanta.getItems();
 
         for (Planta p : ap) {
-            dades.add(new TaulaPlanta(String.valueOf(p.getId()),String.valueOf(p.getSuperficie()),String.valueOf(p.getNumSales()),String.valueOf(p.getNumHabitacions())));
+            dades.add(new TaulaPlanta(String.valueOf(p.getId()), String.valueOf(p.getSuperficie()), String.valueOf(p.getNumSales()), String.valueOf(p.getNumHabitacions())));
             habitacio(p);
         }
+
+        editCellSup(sup);
+        editCellSales(sales);
+
+
     }
 
-    public void habitacio(Planta p){
+    public void habitacio(Planta p) {
         ArrayList<Habitacio> ah = p.getHabitacions();
-        ObservableList<TaulaHabitacio> dades = taulaHabitacio.getItems();
+        dadesHab = taulaHabitacio.getItems();
 
         for (Habitacio h : ah) {
-            dades.add(new TaulaHabitacio(String.valueOf(p.getId()),String.valueOf(h.getId()),String.valueOf(h.getNumLlits())));
+            dadesHab.add(new TaulaHabitacio(String.valueOf(p.getId()), String.valueOf(h.getId()), String.valueOf(h.getNumLlits())));
         }
-    }
 
 
+        editCellLlits(llits);
 
 
-    public boolean comprovaDadesEspai(){
-        if(nom.getText().isEmpty()||plantes.getText().isEmpty()||adreca.getText().isEmpty()||accessibilitat.getValue().toString().isEmpty()||disponibilitat.getValue().toString().isEmpty()){
-            return false;
-        }
-        return true;
-
-    }
-
-    private boolean comprovaDadesPlanta(TextField superficie, TextField sales, TextField habitacions) {
-        if(superficie.getText().isEmpty()||sales.getText().isEmpty()||habitacions.getText().isEmpty()){
-            return false;
-        }
-        return true;
-    }
-
-    private boolean comprovaDadesHabitacio(TextField llits) {
-        if(llits.getText().isEmpty()){
-            return false;
-        }
-        return true;
     }
 
     public Espai buscaEspai(int id) {
@@ -269,10 +273,96 @@ public class EspaiModificaController  implements Initializable {
         return null;
     }
 
-    public void clickItem(){
-        id = Integer.parseInt(taulaPlanta.getSelectionModel().getSelectedItem().getPlanta());
+    public void clickItem() {
+        if (!taulaPlanta.getSelectionModel().getSelectedCells().isEmpty()) {
+            id = Integer.parseInt(taulaPlanta.getSelectionModel().getSelectedItem().getPlanta());
+        }
     }
 
+    private void editCellSup(TableColumn<TaulaPlanta, String> x) {
+        x.setCellFactory(TextFieldTableCell.<TaulaPlanta>forTableColumn());
+
+        x.setOnEditCommit(
+                (TableColumn.CellEditEvent<TaulaPlanta, String> t) -> {
+                    ((TaulaPlanta) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())
+                    ).setSuperficie(t.getNewValue());
+                });
+    }
+
+    private void editCellSales(TableColumn<TaulaPlanta, String> x) {
+        x.setCellFactory(TextFieldTableCell.<TaulaPlanta>forTableColumn());
+        x.setOnEditCommit(
+                (TableColumn.CellEditEvent<TaulaPlanta, String> t) -> {
+                    ((TaulaPlanta) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())
+                    ).setSales(t.getNewValue());
+                });
+    }
+
+    private void editCellLlits(TableColumn<TaulaHabitacio, String> x) {
+        x.setCellFactory(TextFieldTableCell.<TaulaHabitacio>forTableColumn());
+        x.setOnEditCommit(
+                (TableColumn.CellEditEvent<TaulaHabitacio, String> t) -> {
+                    ((TaulaHabitacio) t.getTableView().getItems().get(
+                            t.getTablePosition().getRow())
+                    ).setLlits(t.getNewValue());
+                });
+    }
+
+    @FXML
+    private void addPlant() {
+
+        plantOld++;
+        plantes.setText(String.valueOf(plantOld));
+        dades.add(new TaulaPlanta(String.valueOf(plantOld), "0", "0", "0"));
+    }
+
+
+    private void addButtonToTable() {
+        TableColumn<TaulaPlanta, Void> colBtn = new TableColumn("");
+
+        Callback<TableColumn<TaulaPlanta, Void>, TableCell<TaulaPlanta, Void>> cellFactory = new Callback<>() {
+            @Override
+            public TableCell<TaulaPlanta, Void> call(final TableColumn<TaulaPlanta, Void> param) {
+                final TableCell<TaulaPlanta, Void> cell = new TableCell<>() {
+
+                    private final Button btn = new Button("+");
+
+
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            TaulaPlanta tp = getTableView().getItems().get(getIndex());
+                            habOld = Integer.parseInt(tp.getHabitacions());
+                            habOld++;
+                            tp.setHabitacions(String.valueOf(habOld));
+                            int h = Integer.parseInt(tp.getPlanta());
+                            dadesHab.add(new TaulaHabitacio(String.valueOf(h), String.valueOf(habOld), "0"));
+                        });
+
+
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        colBtn.setCellFactory(cellFactory);
+
+        taulaPlanta.getColumns().add(colBtn);
+
+    }
 }
 
 

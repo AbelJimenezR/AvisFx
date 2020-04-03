@@ -48,16 +48,17 @@ public class UsuariBuscaController implements Initializable {
             stage.show();
 
         } else if (bot.equals("Editar")) {
-
-            Parent arrel = FXMLLoader.load(getClass().getResource("..//view//usuariModifica.fxml"));
-            stage.setTitle("Usuaris");
-            stage.setScene(new Scene(arrel));
-            stage.show();
+            if(!id.getText().isEmpty()) {
+                Parent arrel = FXMLLoader.load(getClass().getResource("..//view//usuariModifica.fxml"));
+                stage.setTitle("Usuaris");
+                stage.setScene(new Scene(arrel));
+                stage.show();
+            }
         }
     }
 
     public void buscaUsuari() {
-        if (idBusca.getText().isEmpty() || idBusca.getText().matches("\\d*")) {
+        if (!idBusca.getText().isEmpty() && idBusca.getText().matches("\\d*")) {
             int i = Integer.parseInt(idBusca.getText());
             ArrayList<Usuari> au = CarregaDadesDao.getLlistaUsuaris();
             for (Usuari u : au) {

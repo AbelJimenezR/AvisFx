@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
@@ -85,20 +86,22 @@ public class IaioModificaController implements Initializable {
             stage.setScene(new Scene(arrel));
             stage.show();
 
-        } else if (bot.equals("Ok")) {
-            String d = incapacitat.getValue().toString();
-            String c= d.substring(0,1);
-            try {
-                IaioDao id = new IaioDao();
-                id.actualitzarIaio(idold, nom.getText(), Integer.parseInt(edat.getText()), Integer.parseInt(c));
+        } else if (bot.equals("Modificar")) {
+            if (comprovaDades()) {
+                String d = incapacitat.getValue().toString();
+                String c = d.substring(0, 1);
+                try {
+                    IaioDao id = new IaioDao();
+                    id.actualitzarIaio(idold, nom.getText(), Integer.parseInt(edat.getText()), Integer.parseInt(c));
 
 
-            } catch (Exception e) {
+                } catch (Exception e) {
+                }
+                Parent arrel = FXMLLoader.load(getClass().getResource("..//view//iaioVeure.fxml"));
+                stage.setTitle("Avis");
+                stage.setScene(new Scene(arrel));
+                stage.show();
             }
-            Parent arrel = FXMLLoader.load(getClass().getResource("..//view//iaioVeure.fxml"));
-            stage.setTitle("Avis");
-            stage.setScene(new Scene(arrel));
-            stage.show();
         }
     }
 
@@ -111,6 +114,19 @@ public class IaioModificaController implements Initializable {
             }
         }
         return null;
+    }
+
+    private boolean comprovaDades(){
+        if(nom.getText().isEmpty()||(edat.getText().isEmpty()||!edat.getText().matches("\\d*"))||incapacitat.getValue()==null){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Advertència");
+            alert.setHeaderText("Falten dades per introduïr");
+            alert.setContentText("Torna-ho a provar");
+            alert.showAndWait();
+
+            return false;
+        }
+        return true;
     }
 
 

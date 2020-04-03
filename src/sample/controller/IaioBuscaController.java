@@ -44,38 +44,43 @@ public class IaioBuscaController implements Initializable {
             stage.show();
 
         } else if (bot.equals("Editar")) {
+            if(!id.getText().isEmpty()) {
 
-            Parent arrel = FXMLLoader.load(getClass().getResource("..//view//iaioModifica.fxml"));
-            stage.setTitle("Avis");
-            stage.setScene(new Scene(arrel));
-            stage.show();
+                Parent arrel = FXMLLoader.load(getClass().getResource("..//view//iaioModifica.fxml"));
+                stage.setTitle("Avis");
+                stage.setScene(new Scene(arrel));
+                stage.show();
+            }
         }
     }
 
     public void buscaIaio() {
-        int i = Integer.parseInt(idBusca.getText());
-        ArrayList<Iaio> ai = CarregaDadesDao.getLlistaIaios();
-        for (Iaio u : ai) {
-            if (u.getId() == i) {
-                iaio = u;
-                break;
+        if (!idBusca.getText().isEmpty() && idBusca.getText().matches("\\d*")) {
+            int i = Integer.parseInt(idBusca.getText());
+            ArrayList<Iaio> ai = CarregaDadesDao.getLlistaIaios();
+            for (Iaio u : ai) {
+                if (u.getId() == i) {
+                    iaio = u;
+                    break;
+                }
             }
-        }
-        if (iaio == null) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Advertència");
-            alert.setHeaderText("No s'ha trobat cap iaio");
-            alert.setContentText("Torna-ho a provar");
-            alert.showAndWait();
+            if (iaio == null) {
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Advertència");
+                alert.setHeaderText("No s'ha trobat cap iaio");
+                alert.setContentText("Torna-ho a provar");
+                alert.showAndWait();
+            } else {
+
+                idBusca.setText("");
+                idold = iaio.getId();
+                id.setText(String.valueOf(iaio.getId()));
+                nom.setText(iaio.getNom());
+                edat.setText(String.valueOf(iaio.getEdat()));
+                incapacitat.setText(String.valueOf(iaio.getIncapacitat()));
+            }
             idBusca.setText("");
-        } else {
-
-
-            idold = iaio.getId();
-            id.setText(String.valueOf(iaio.getId()));
-            nom.setText(iaio.getNom());
-            edat.setText(String.valueOf(iaio.getEdat()));
-            incapacitat.setText(String.valueOf(iaio.getIncapacitat()));
+            iaio=null;
         }
     }
 

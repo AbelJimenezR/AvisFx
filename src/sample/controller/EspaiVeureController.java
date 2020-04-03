@@ -57,10 +57,12 @@ public class EspaiVeureController implements Initializable {
 
     @FXML
     public void clickItem(MouseEvent event) {
-        bEdita.setDisable(false);
-        bEsborra.setDisable(false);
-        id = Integer.parseInt(taulaEspais.getSelectionModel().getSelectedItem().getId());
-        System.out.println(id);
+        if(!taulaEspais.getSelectionModel().getSelectedCells().isEmpty()) {
+            bEdita.setDisable(false);
+            bEsborra.setDisable(false);
+            id = Integer.parseInt(taulaEspais.getSelectionModel().getSelectedItem().getId());
+            System.out.println(id);
+        }
     }
 
     @FXML

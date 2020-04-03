@@ -12,7 +12,7 @@
         <TextField fx:id="edat" layoutX="310.0" layoutY="210.0" />
         <ChoiceBox fx:id="incapacitat" layoutX="310.0" layoutY="245.0" prefWidth="170.0" />
         <Button layoutX="347.0" layoutY="325.0" mnemonicParsing="false" onAction="#optBotons" text="Tornar" />
-        <Button layoutX="277.0" layoutY="325.0" mnemonicParsing="false" onAction="#optBotons" text="Ok" />
+        <Button layoutX="260.0" layoutY="325.0" mnemonicParsing="false" onAction="#optBotons" text="Modificar" />
         <Label layoutX="200.0" layoutY="100.0" text="Id:" />
         <Label layoutX="200.0" layoutY="130.0" text="Nom:" />
         <Label layoutX="200.0" layoutY="210.0" text="Edat:" />
