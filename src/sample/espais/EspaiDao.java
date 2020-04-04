@@ -63,8 +63,6 @@ public class EspaiDao implements IEspaiDao {
 
     }
 
-
-
     @Override
     public boolean crearEspai() {
         int idEspai = ultimId()+1;
@@ -281,6 +279,24 @@ public class EspaiDao implements IEspaiDao {
             st.execute(query);
             st.close();
             actualitzaPlanta(ep);
+
+
+        } catch (Exception e) {
+            System.err.println("Got an exception! a");
+            System.err.println(e.getMessage());
+        }
+
+
+    }
+
+    public void actualitzaDisponibilitat(Espai esp){
+            int id_espai=esp.getId();
+        try {
+            Connection conn = Conexion.conectar();
+            String query = "UPDATE espai set disponibilitat=0 where id_espai=1"+id_espai+"";
+            Statement st = conn.createStatement();
+            st.execute(query);
+            st.close();
 
 
         } catch (Exception e) {

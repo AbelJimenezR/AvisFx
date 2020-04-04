@@ -14,7 +14,7 @@ public abstract class Espai {
 	private ArrayList<Planta> plantes = new ArrayList<>();
 
 	// constructor
-	Espai(int id, String adreca, boolean accessibilitat, boolean disponibilitat, int numPlantes) {
+	public Espai(int id, String adreca, boolean accessibilitat, boolean disponibilitat, int numPlantes) {
 		this.id = id;
 		this.numPlantes = plantes.size();
 		this.adreca = adreca;

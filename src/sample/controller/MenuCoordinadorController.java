@@ -163,7 +163,7 @@ public class MenuCoordinadorController implements Initializable {
         }
 
         //TANCA SESSI�*********************/
-        if (sItem.equals("Tancar Sessió")) {
+        if (sItem.equals("Tancar Sessio")) {
             Parent arrel = FXMLLoader.load(getClass().getResource("..//view//Main.fxml"));
 
             stage.setTitle("Avis sense Llar");

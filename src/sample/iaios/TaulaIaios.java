@@ -21,7 +21,6 @@ public class TaulaIaios {
         this.id.set(id);
     }
 
-
     public String getId() {
         return id.get();
     }

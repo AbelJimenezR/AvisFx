@@ -15,6 +15,8 @@ public class Main extends Application {
         cd.carregaUsuaris();
         cd.carregaIaios();
         cd.carregaEspais();
+        cd.carregaSuggeriments();
+        cd.carregaHistorial();
 
         Parent root = FXMLLoader.load(getClass().getResource("view/Main.fxml"));
         primaryStage.setTitle("Avis sense llar");

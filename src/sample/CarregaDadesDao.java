@@ -1,8 +1,8 @@
 package sample;
 
 import sample.espais.*;
-//import sample.historial.*;
-//import sample.suggeriment.*;
+import sample.historial.*;
+import sample.suggeriment.*;
 import sample.iaios.GrauIncapacitat;
 import sample.iaios.Iaio;
 import sample.usuaris.Usuari;
@@ -18,8 +18,8 @@ public class CarregaDadesDao implements ICarregaDadesDao {
     private static ArrayList<Usuari> llistaUsuaris = new ArrayList<Usuari>();
     private static ArrayList<Iaio> llistaIaios = new ArrayList<Iaio>();
     private static ArrayList<Espai> llistaEspais = new ArrayList<Espai>();
-    //private static ArrayList<Suggeriment> llistaSuggeriments = new ArrayList<Suggeriment>();
-    //private static ArrayList<Historial> llistaHistorial = new ArrayList<Historial>();
+    private static ArrayList<Suggeriment> llistaSuggeriments = new ArrayList<Suggeriment>();
+    private static ArrayList<Historial> llistaHistorial = new ArrayList<Historial>();
     private ArrayList<ArrayList> planta = new ArrayList<>();
     private ArrayList<ArrayList> habitacion = new ArrayList<>();
 
@@ -223,7 +223,7 @@ public class CarregaDadesDao implements ICarregaDadesDao {
                 Date dE = rs.getDate("data_entrada");
                 Date dS = rs.getDate("data_sortida");
 
-                //llistaSuggeriments.add(new Suggeriment(idE, idP, idH, nomI, idI, dE, dS));
+                llistaSuggeriments.add(new Suggeriment(idE, idP, idH, nomI, idI, dE, dS));
 
             }
             rs.close();
@@ -250,10 +250,10 @@ public class CarregaDadesDao implements ICarregaDadesDao {
                 int idH = rs.getInt("id_habitacio");
                 String nomI = rs.getString("nom_iaio");
                 int idI = rs.getInt("id_iaio");
-                Date dE = rs.getDate("d_Entrada");
-                Date dS = rs.getDate("d_Sortida");
+                Date dE = rs.getDate("data_entrada");
+                Date dS = rs.getDate("data_sortida");
 
-                //llistaHistorial.add(new Historial(idE, idP, idH, nomI, idI, dE, dS));
+                llistaHistorial.add(new Historial(idE, idP, idH, nomI, idI, dE, dS));
 
             }
             rs.close();
@@ -323,6 +323,8 @@ break;
         //System.out.println(ep);
     }
 
+
+
     public static ArrayList<Usuari> getLlistaUsuaris() {
         return llistaUsuaris;
     }
@@ -348,7 +350,7 @@ break;
     }
 
 
-	/*public static ArrayList<Suggeriment> getLlistaSuggeriments() {
+	public static ArrayList<Suggeriment> getLlistaSuggeriments() {
 		return llistaSuggeriments;
 	}
 
@@ -367,6 +369,6 @@ break;
 		CarregaDadesDao.llistaHistorial = llistaHistorial;
 	}
 
-*/
+
 
 }

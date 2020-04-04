@@ -56,7 +56,7 @@ public class MainController implements Initializable {
 
         } else if (Utilitat.comprovaUsuari(nom.getText(), password.getText()).equals("no")) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Advertència");
+            alert.setTitle("Advertencia");
             alert.setHeaderText("Usuari o contrasenya incorrecte");
             alert.setContentText("Torna-ho a provar");
             alert.showAndWait();
