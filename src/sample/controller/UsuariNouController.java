@@ -73,6 +73,7 @@ public class UsuariNouController implements Initializable {
                 if (ud.crearUsuari(nom.getText(), pass.getText(), Integer.parseInt(c))) {
                     nom.setText("");
                     pass.setText("");
+                    pass_hidden.setText("");
                     rol.setValue(null);
                     labelOk.setText("Usuari afegit correctament");
                     PauseTransition pT = new PauseTransition(Duration.seconds(1));
@@ -112,6 +113,11 @@ public class UsuariNouController implements Initializable {
             veurePass.setText("Mostra");
 
         }
+    }
+
+    @FXML
+    private void copia(){
+        pass.setText(pass_hidden.getText());
     }
 }
 

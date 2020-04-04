@@ -71,7 +71,7 @@ public class EspaiNouController implements Initializable {
 
         for (int x = 1; x < 3; x++) {
             if (x == 1) {
-                accessibilitat.getItems().add("SÍ");
+                accessibilitat.getItems().add("SI");
 
             } else {
                 accessibilitat.getItems().add("NO");
@@ -116,7 +116,7 @@ public class EspaiNouController implements Initializable {
             stage.show();
 
 
-        } else if (bot.equals("Següent")) {
+        } else if (bot.equals("Seguent")) {
             if (comprovaDadesEspai()) {
                 espai.setDisable(true);
                 planta();
@@ -127,7 +127,7 @@ public class EspaiNouController implements Initializable {
 
 
 
-            access = (accessibilitat.getValue().toString().equals("SÍ")) ? true : false;
+            access = (accessibilitat.getValue().toString().equals("SI")) ? true : false;
             //  disp= (disponibilitat.getValue().toString().equals("SÍ"))? true:false;
 
             int id = EspaiDao.ultimId() + 1;
